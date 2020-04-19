@@ -1,0 +1,40 @@
+.navItem {
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid;
+  display: block;
+}
+
+.navItem:active {
+  background-color: orange !important;
+}
+
+.navItemActive {
+  background-color: blue;
+  color: white;
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  min-height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+[data-tap-active="true"] > .navItem,
+.navItem:active {
+  background-color: orange;
+}

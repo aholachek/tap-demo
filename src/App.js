@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styles from "./App.scss";
+import TapWrapper from "./TapWrapper";
+
+const fib = (n) => {
+  if (n === 0 || n === 1) return n;
+  return fib(n - 2) + fib(n - 1);
+};
+
+function Home() {
+  fib(40);
+  return <div className={"page"}>Home</div>;
+}
+
+function Search() {
+  fib(40);
+  return <div className={"page"}>Search</div>;
+}
+
+function Nav({ setPage, activePage }) {
+  return (
+    <nav>
+      <ul className={"navList"}>
+        {["home", "search"].map((name) => {
+          return (
+            <li key={name}>
+              <TapWrapper>
+                <a
+                  className={`navItem ${
+                    activePage === name ? "navItemActive" : ""
+                  }`}
+                  href={`/${name}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPage(name);
+                  }}
+                >
+                  {name}
+                </a>
+              </TapWrapper>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
 
 function App() {
+  const [page, setPage] = React.useState("home");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {page === "home" ? <Home /> : <Search />}
+      <Nav activePage={page} setPage={setPage} />
     </div>
   );
 }
