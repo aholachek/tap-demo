@@ -12,9 +12,14 @@
   justify-content: center;
   align-items: center;
   user-select: none;
+  cursor: pointer;
   svg {
     height: 3.25rem;
   }
+}
+
+.navItem:hover {
+  background-color: var(--backgroundColor);
 }
 
 .navItem.tapActive {

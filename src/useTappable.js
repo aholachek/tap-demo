@@ -17,8 +17,10 @@ export default function useTappable({
   onClick,
 } = {}) {
   const timeoutRef = React.useRef();
+  const isTouchDeviceRef = React.useRef(false);
 
   const onTouchStart = (e) => {
+    isTouchDeviceRef.current = true;
     const cachedTarget = e.currentTarget;
     timeoutRef.current = setTimeout(() => {
       cachedTarget.classList.add(tapClass);
@@ -32,9 +34,12 @@ export default function useTappable({
   };
 
   const wrappedOnClick = (e) => {
+    if (preventDefault) e.preventDefault();
+    // it's not a touchscreen device, just call the onclick function
+    if (!isTouchDeviceRef.current) return onClick(e);
+
     e.persist();
     const cachedTarget = e.currentTarget;
-    if (preventDefault) e.preventDefault();
 
     const isClick = Boolean(timeoutRef.current);
     if (!isClick) return;
