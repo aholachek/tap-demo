@@ -28,6 +28,7 @@ export default function useTappable({
   };
 
   const onTouchMove = (e) => {
+    // once this is triggered, we're not going to treat it as a tap anymore
     clearTimeout(timeoutRef.current);
     timeoutRef.current = null;
     e.currentTarget.classList.remove(tapClass);
