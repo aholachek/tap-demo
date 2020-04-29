@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
-  console.log({ activePage, name });
   return (
     <li>
       <Link
