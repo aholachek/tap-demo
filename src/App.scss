@@ -18,8 +18,8 @@
   }
 
   @media (pointer: fine) {
-    .navItem:hover,
-    .navItem:active {
+    &:hover,
+    &:active {
       background-color: var(--backgroundColor);
       color: var(--color);
     }
