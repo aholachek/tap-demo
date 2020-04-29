@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ReactComponent as DogIcon } from "./assets/Dog.svg";
 import { ReactComponent as CatIcon } from "./assets/Cat.svg";
 import { ReactComponent as BirdIcon } from "./assets/Bird.svg";
@@ -18,47 +19,6 @@ import hippoFace from "./assets/hippo-face.jpg";
 import horseFace from "./assets/horse-face.png";
 
 import "./App.scss";
-
-const fib = (n) => {
-  if (n === 0 || n === 1) return n;
-  return fib(n - 2) + fib(n - 1);
-};
-
-const fibCount = 39;
-
-const paraSizes = {
-  cat: [50, 25, 30, 50, 25, 50, 50, 10, 25, 50, 50, 30, 30, 50, 25, 10],
-  bird: [25, 50, 50, 30, 30, 50, 25, 10, 25, 50, 50, 30, 30, 50, 25, 10],
-  dog: [30, 50, 25, 50, 30, 50, 30, 10, 25, 50, 50, 30, 30, 50, 25, 10],
-};
-
-function Page({ profilePic, name, color }) {
-  fib(fibCount);
-  React.useEffect(() => {
-    document.head
-      .querySelector('meta[name="theme-color"]')
-      .setAttribute("content", color);
-  }, [color]);
-
-  return (
-    <div>
-      <div
-        className="topNav"
-        style={{
-          "--color": color,
-        }}
-      ></div>
-      <div className={"page"}>
-        <img src={profilePic} alt="" className="profile" />
-        <div className="wire-frame">
-          {(paraSizes[name] || paraSizes.cat).map((r) => (
-            <div style={{ height: r }}></div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 const config = [
   {
@@ -112,15 +72,74 @@ const config = [
   },
 ];
 
+const fib = (n) => {
+  if (n === 0 || n === 1) return n;
+  return fib(n - 2) + fib(n - 1);
+};
+
+const fibCount = 35;
+
+const paraSizes = {
+  cat: [50, 25, 30, 50, 25, 50, 50, 10, 25, 50, 50, 30, 30, 50, 25, 10],
+  bird: [25, 50, 50, 30, 30, 50, 25, 10, 25, 50, 50, 30, 30, 50, 25, 10],
+  dog: [30, 50, 25, 50, 30, 50, 30, 10, 25, 50, 50, 30, 30, 50, 25, 10],
+};
+
+function Page({ name }) {
+  const { color, profilePic } = config.find((c) => c.name === name);
+  fib(fibCount);
+  React.useEffect(() => {
+    document.head
+      .querySelector('meta[name="theme-color"]')
+      .setAttribute("content", color);
+  }, [color]);
+
+  return (
+    <div>
+      <div
+        className="topNav"
+        style={{
+          "--color": color,
+        }}
+      ></div>
+      <div className={"page"}>
+        <img src={profilePic} alt="" className="profile" />
+        <div className="wire-frame">
+          {(paraSizes[name] || paraSizes.cat).map((r) => (
+            <div style={{ height: r }}></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [page, setPage] = React.useState("dog");
   const data = config.find((c) => c.name === page);
   const profilePic = data.profilePic;
   return (
-    <div className="app">
-      <Page profilePic={profilePic} name={page} color={data.color} key={page} />
-      <Nav activePage={page} setPage={setPage} config={config} />
-    </div>
+    <Router>
+      <div className="app">
+        <Route
+          path="/:page?"
+          render={(routeProps) => {
+            const page = routeProps.match.params.page || 'dog';
+            return (
+              <>
+                <Page
+                  profilePic={profilePic}
+                  color={data.color}
+                  key={page}
+                  name={page}
+                />
+                <Nav activePage={page} setPage={setPage} config={config} />
+              </>
+            );
+          }}
+        />
+      </div>
+    </Router>
   );
 }
 

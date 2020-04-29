@@ -1,34 +1,22 @@
 import React from "react";
-import useTappable from "../useTappable";
+import { Link } from "react-router-dom";
 
-const NavItem = ({
-  name,
-  icon: Icon,
-  setPage,
-  activePage,
-  color,
-  backgroundColor,
-}) => {
-  const listeners = useTappable({
-    onClick: () => {
-      setPage(name);
-    },
-    preventDefault: true,
-  });
-
+const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
+  console.log({ activePage, name });
   return (
-    <li key={name}>
-      <a
+    <li>
+      <Link
+        onTouchStart={(e) => e.currentTarget.classList.add("tapActive")}
+        onTouchMove={(e) => e.currentTarget.classList.remove("tapActive")}
         style={{
           "--color": color,
           "--backgroundColor": backgroundColor,
         }}
         className={`navItem ${activePage === name ? "navItemActive" : ""}`}
-        href={`/${name}`}
-        {...listeners}
+        to={`/${name}`}
       >
         <Icon />
-      </a>
+      </Link>
     </li>
   );
 };
@@ -39,7 +27,12 @@ export default function Nav({ setPage, activePage, config }) {
       <ul className={"navList"}>
         {config.map((data) => {
           return (
-            <NavItem setPage={setPage} activePage={activePage} {...data} />
+            <NavItem
+              setPage={setPage}
+              activePage={activePage}
+              {...data}
+              key={data.name}
+            />
           );
         })}
       </ul>

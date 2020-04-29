@@ -3,8 +3,8 @@
   display: block;
   color: var(--color-black);
   padding: 1rem;
-  width: 5rem;
-  height: 5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 100px;
   text-decoration: none;
   display: flex;
@@ -16,26 +16,17 @@
   svg {
     height: 3.25rem;
   }
-}
 
-.navItem:hover {
-  background-color: var(--backgroundColor);
-}
-
-.navItem.tapActive {
-  background-color: var(--backgroundColor);
-  color: var(--color);
-}
-
-.navItem:active {
-  @media (pointer: fine) {
+  &.tapActive {
     background-color: var(--backgroundColor);
     color: var(--color);
+    transition: background-color 0s, color 0s;
+    transition-delay: 60ms;
   }
-}
 
-.navItem.navItemActive {
-  color: var(--color);
+  &.navItemActive {
+    color: var(--color);
+  }
 }
 
 .navList {
