@@ -18,8 +18,7 @@
   }
 
   @media (pointer: fine) {
-    &:hover,
-    &:active {
+    &:hover {
       background-color: var(--backgroundColor);
       color: var(--color);
     }
@@ -28,7 +27,7 @@
   &.tapActive {
     background-color: var(--backgroundColor);
     color: var(--color);
-    transition: background-color 0s, color 0s;
+    transition: background-color 0ms, color 0ms;
     transition-delay: 60ms;
   }
 

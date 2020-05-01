@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
+import useTapActivePolyfill from "./useTapActivePolyfill";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ReactComponent as DogIcon } from "./assets/Dog.svg";
 import { ReactComponent as CatIcon } from "./assets/Cat.svg";
@@ -105,8 +106,8 @@ function Page({ name }) {
       <div className={"page"}>
         <img src={profilePic} alt="" className="profile" />
         <div className="wire-frame">
-          {(paraSizes[name] || paraSizes.cat).map((r) => (
-            <div style={{ height: r }}></div>
+          {(paraSizes[name] || paraSizes.cat).map((r, i) => (
+            <div key={i} style={{ height: r }}></div>
           ))}
         </div>
       </div>
@@ -115,16 +116,18 @@ function Page({ name }) {
 }
 
 function App() {
+  useTapActivePolyfill();
   const [page, setPage] = React.useState("dog");
   const data = config.find((c) => c.name === page);
   const profilePic = data.profilePic;
+
   return (
     <Router>
       <div className="app">
         <Route
           path="/:page?"
           render={(routeProps) => {
-            const page = routeProps.match.params.page || 'dog';
+            const page = routeProps.match.params.page || "dog";
             return (
               <>
                 <Page

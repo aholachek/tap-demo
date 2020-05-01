@@ -5,8 +5,6 @@ const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
   return (
     <li>
       <Link
-        onTouchStart={(e) => e.currentTarget.classList.add("tapActive")}
-        onTouchMove={(e) => e.currentTarget.classList.remove("tapActive")}
         style={{
           "--color": color,
           "--backgroundColor": backgroundColor,
