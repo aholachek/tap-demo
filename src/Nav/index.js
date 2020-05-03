@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./index.module.scss";
 
 const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
   return (
@@ -9,7 +10,9 @@ const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
           "--color": color,
           "--backgroundColor": backgroundColor,
         }}
-        className={`navItem ${activePage === name ? "navItemActive" : ""}`}
+        className={`${styles.navItem} ${
+          activePage === name ? styles.navItemActive : ""
+        }`}
         to={`/${name}`}
       >
         <Icon />
@@ -20,8 +23,8 @@ const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
 
 export default function Nav({ setPage, activePage, config }) {
   return (
-    <nav className="nav">
-      <ul className={"navList"}>
+    <nav className={styles.nav}>
+      <ul className={styles.navList}>
         {config.map((data) => {
           return (
             <NavItem
