@@ -1,11 +1,14 @@
 import React from "react";
 
+// this is the name of the class we will toggle on and off an element when it is tapped
 const activeClassName = "tapActive";
 
+// a helper function to grab an element off an event
 const getInteractiveEl = (event) => {
   try {
     const path = event.composedPath();
     const bodyIndex = path.indexOf(document.body);
+    // find the first interactive element in the path of elements that the event bubbled up into
     return path
       .slice(0, bodyIndex === -1 ? path.length : bodyIndex)
       .filter(
@@ -39,6 +42,9 @@ const removeClass = (event) => {
   interactiveEl.classList.remove(activeClassName);
 };
 
+// use "click" instead of "touchend" because it is triggered after touchend
+// and we want the tap styles to stay on the element as long as possible
+// (this makes a difference at leeast on later iOS versions)
 const removeActiveClassEvents = ["touchmove", "touchcancel", "click"];
 
 function addTapListeners() {
