@@ -54,7 +54,7 @@ function removeTapListeners() {
   );
 }
 
-export default function useTapActivePolyfill() {
+export default function useGlobalTypeStyles() {
   React.useEffect(() => {
     addTapListeners();
     return removeTapListeners;

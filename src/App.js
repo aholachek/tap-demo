@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Page from "./Page";
 import styles from "./App.module.scss";
-import useTapActivePolyfill from "./useTapActivePolyfill";
+import useGlobalTapStyles from "./useGlobalTapStyles";
 import config from "./config";
 
 function App() {
-  useTapActivePolyfill();
+  useGlobalTapStyles();
   return (
     <Router>
       <div className={styles.app}>
