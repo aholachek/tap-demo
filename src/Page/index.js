@@ -33,8 +33,8 @@ export default function Page({ color, profilePic, otherPages, name }) {
       </div>
       <div className={styles.page}>
         <p>
-          This app has various clickable items to help you test tap highlight styles on
-          mobile.
+          This app has various clickable items to help you test tap highlight
+          styles on mobile.
         </p>
         <p>
           All page transitions will block for some amount of time due to the
@@ -53,11 +53,13 @@ export default function Page({ color, profilePic, otherPages, name }) {
 
         {otherPages.concat(otherPages).map((data) => {
           return (
-            <p>
-              <Link to={`/${data.name}`} className={styles.testLinkTwo}>
-                Can I interest you in a {data.name}?
-              </Link>
-            </p>
+            <ul>
+              <li>
+                <Link to={`/${data.name}`} className={styles.testLinkTwo}>
+                  Can I interest you in a {data.name}?
+                </Link>
+              </li>
+            </ul>
           );
         })}
       </div>
