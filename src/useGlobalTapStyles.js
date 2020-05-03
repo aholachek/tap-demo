@@ -44,7 +44,7 @@ const removeClass = (event) => {
 
 // use "click" instead of "touchend" because it is triggered after touchend
 // and we want the tap styles to stay on the element as long as possible
-// (this makes a difference at leeast on later iOS versions)
+// (this makes a difference at least on later iOS versions)
 const removeActiveClassEvents = ["touchmove", "touchcancel", "click"];
 
 function addTapListeners() {
