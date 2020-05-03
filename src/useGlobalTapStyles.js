@@ -30,6 +30,7 @@ const removeClass = (event) => {
   if (!interactiveEl) return;
   if (event.type === "click") {
     interactiveEl.classList.add(activeClassName);
+    // keep the tap style on 1 tick later in case the UI blocks
     return setTimeout(() => {
       interactiveEl.classList.remove(activeClassName);
     });
