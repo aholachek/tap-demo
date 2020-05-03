@@ -33,7 +33,7 @@ export default function Page({ color, profilePic, otherPages, name }) {
       </div>
       <div className={styles.page}>
         <p>
-          This app has various clickable items to help you test tap styles on
+          This app has various clickable items to help you test tap highlight styles on
           mobile.
         </p>
         <p>

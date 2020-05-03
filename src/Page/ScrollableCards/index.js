@@ -25,9 +25,10 @@ const CardList = () => {
       {cards.map((src) => (
         <a
           href="/"
+          className={styles.cardLink}
           onClick={(e) => {
             e.preventDefault();
-            alert('please check back later for this fish')
+            alert('what a nice fish!')
           }}
         >
           <li>

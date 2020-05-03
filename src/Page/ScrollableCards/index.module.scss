@@ -7,6 +7,7 @@
   grid-gap: 1rem;
   width: 100%;
   overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
   padding: 0;
   margin-bottom: 3rem;
   &::after {
@@ -18,25 +19,24 @@
     display: none;
   }
 
-  > a {
-    transition: transform 0.25s;
-    display: inline-block;
-    width: 100%;
-    scroll-snap-align: start;
-    height: 8rem;
-    width: 8rem;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  > a:active {
-    transform: scale(0.975);
-  }
-
   li {
     img {
       width: 100%;
       object-fit: cover;
     }
+  }
+}
+
+.cardLink {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 150ms 50ms;
+  display: inline-block;
+  width: 100%;
+  scroll-snap-align: start;
+  height: 8rem;
+  width: 8rem;
+  overflow: hidden;
+  &:global(.tapActive) {
+    transform: scale(0.925);
   }
 }
