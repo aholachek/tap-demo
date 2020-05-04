@@ -30,6 +30,7 @@ const CardList = () => {
             e.preventDefault();
             alert('what a nice fish!')
           }}
+          data-tap
         >
           <li>
             <img src={src} alt="a fish" />

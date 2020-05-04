@@ -1,45 +1,30 @@
 import React from "react";
 
-// this is the name of the class we will toggle on and off an element when it is tapped
-const activeClassName = "tapActive";
+const dataAttribute = "tap";
+const tapActiveValue = "active";
 
-// a helper function to grab an element off an event
+let isTouchDevice = false;
+
 const getInteractiveEl = (event) => {
   try {
-    const path = event.composedPath();
-    const bodyIndex = path.indexOf(document.body);
-    // find the first interactive element in the path of elements that the event bubbled up into
-    return path
-      .slice(0, bodyIndex === -1 ? path.length : bodyIndex)
-      .filter(
-        (el) =>
-          el.tagName === "A" ||
-          el.tagName === "BUTTON" ||
-          el.getAttribute("role") === "button" ||
-          el.getAttribute("role") === "link"
-      )[0];
+    return event
+      .composedPath()
+      .find((el) => el.dataset && el.dataset[dataAttribute]);
   } catch (e) {
     return undefined;
   }
-};
-
-const addClass = (event) => {
-  const interactiveEl = getInteractiveEl(event);
-  if (interactiveEl) interactiveEl.classList.add(activeClassName);
 };
 
 const removeClass = (event) => {
   const interactiveEl = getInteractiveEl(event);
   if (!interactiveEl) return;
   if (event.type === "click") {
-    interactiveEl.classList.add(activeClassName);
     // keep the tap style on 1 tick later in case the UI blocks
     return setTimeout(() => {
-      interactiveEl.classList.remove(activeClassName);
+      interactiveEl.dataset[dataAttribute] = "";
     });
   }
-  if (!interactiveEl.classList.contains(activeClassName)) return;
-  interactiveEl.classList.remove(activeClassName);
+  interactiveEl.dataset[dataAttribute] = "";
 };
 
 // use "click" instead of "touchend" because it is triggered after touchend
@@ -47,15 +32,24 @@ const removeClass = (event) => {
 // (this makes a difference at least on later iOS versions)
 const removeActiveClassEvents = ["touchmove", "touchcancel", "click"];
 
+const onTouchStart = (event) => {
+  if (!isTouchDevice) {
+    isTouchDevice = true;
+    // we only need to add these listeners if its a touch device
+    removeActiveClassEvents.forEach((event) =>
+      document.body.addEventListener(event, removeClass, false)
+    );
+  }
+  const interactiveEl = getInteractiveEl(event);
+  if (interactiveEl) interactiveEl.dataset[dataAttribute] = tapActiveValue;
+};
+
 function addTapListeners() {
-  document.body.addEventListener("touchstart", addClass, false);
-  removeActiveClassEvents.forEach((event) =>
-    document.body.addEventListener(event, removeClass, false)
-  );
+  document.body.addEventListener("touchstart", onTouchStart, false);
 }
 
 function removeTapListeners() {
-  document.body.removeEventListener("touchstart", addClass, false);
+  document.body.removeEventListener("touchstart", onTouchStart, false);
   removeActiveClassEvents.forEach((event) =>
     document.body.removeEventListener(event, removeClass, false)
   );

@@ -24,7 +24,7 @@
     }
   }
 
-  &:global(.tapActive) {
+  &[data-tap="active"] {
     background-color: var(--backgroundColor);
     color: var(--color);
     transition: background-color 0ms, color 0ms;

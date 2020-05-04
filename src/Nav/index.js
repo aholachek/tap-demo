@@ -14,6 +14,7 @@ const NavItem = ({ name, icon: Icon, activePage, color, backgroundColor }) => {
           activePage === name ? styles.navItemActive : ""
         }`}
         to={`/${name}`}
+        data-tap
       >
         <Icon />
       </Link>

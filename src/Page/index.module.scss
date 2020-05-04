@@ -23,7 +23,7 @@
     }
   }
 
-  &:global(.tapActive) {
+  &[data-tap="active"] {
     background-color: var(--color-transparent-blue);
     transition: background-color 0ms 70ms;
   }
@@ -70,7 +70,7 @@
     }
   }
 
-  &:global(.tapActive) {
+  &[data-tap="active"] {
     box-shadow: 0 2px;
     font-weight: bold;
     transition: box-shadow 0ms 70ms, font-weight 0ms 70ms;

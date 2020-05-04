@@ -9,7 +9,7 @@ const fib = (n) => {
 };
 
 // mock a slow-mounting page
-const fibCount = 38;
+const fibCount = 36;
 
 export default function Page({ color, profilePic, otherPages, name }) {
   fib(fibCount);
@@ -42,6 +42,7 @@ export default function Page({ color, profilePic, otherPages, name }) {
           <a
             href="https://en.wikipedia.org/wiki/Fibonacci_number"
             className={styles.testLinkOne}
+            data-tap
           >
             the fibonacci sequence
           </a>
@@ -55,7 +56,11 @@ export default function Page({ color, profilePic, otherPages, name }) {
           return (
             <ul>
               <li>
-                <Link to={`/${data.name}`} className={styles.testLinkTwo}>
+                <Link
+                  to={`/${data.name}`}
+                  className={styles.testLinkTwo}
+                  data-tap
+                >
                   Can I interest you in a {data.name}?
                 </Link>
               </li>
