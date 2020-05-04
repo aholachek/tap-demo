@@ -55,7 +55,7 @@ function removeTapListeners() {
   );
 }
 
-export default function useGlobalTypeStyles() {
+export default function useTapToggle() {
   React.useEffect(() => {
     addTapListeners();
     return removeTapListeners;
